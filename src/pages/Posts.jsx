@@ -155,7 +155,7 @@ const Posts = () => {
             sx={{
               mb: 3,
               borderRadius: "12px",
-              width: "500px",
+              //width: "500px",
               mx: "auto",
               background: "#6a1b9a",
               color: "#fff",
