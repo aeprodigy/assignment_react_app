@@ -17,11 +17,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { ThemeContext } from "../Theming/ThemeProviderWrapper";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
 
+  
   const toggleDrawer = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -39,7 +41,8 @@ const Navbar = () => {
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         {/* Logo */}
-        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
+        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" , display:"flex",}}>
+          <img src={logo} style={{ height: "30px" }} />
           <Link style={{ color: "#fff", textDecoration: "none" }} to="/">
             LU Software
           </Link>
