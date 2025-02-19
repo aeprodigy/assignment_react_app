@@ -26,8 +26,9 @@ const Navbar = () => {
     <AppBar
       position="fixed"
       sx={{
-        background: "rgba(0, 0, 0, 0.0)",
+        background: "#6a1b9a",
         boxShadow: "none",
+        opacity:"10px",
         backdropFilter: "blur(px)",
         width: "100%",
       }}
@@ -40,6 +41,13 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+          <Button
+            component={Link}
+            to="/"
+            sx={{ color: "#fff", fontWeight: "bold" }}
+          >
+            Home
+          </Button>
           <Button component={Link} to="/posts" sx={{ color: "#fff" }}>
             View Posts
           </Button>
@@ -68,7 +76,11 @@ const Navbar = () => {
           onClick={toggleDrawer}
           sx={{ color: "#5a9e34", display: { xs: "block", md: "none" } }}
         >
-          {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+          {mobileOpen ? (
+            <CloseIcon sx={{ fontSize: "2rem" }} />
+          ) : (
+            <MenuIcon sx={{ fontSize: "2rem" }} />
+          )}
         </IconButton>
       </Toolbar>
 
@@ -89,6 +101,15 @@ const Navbar = () => {
           }}
         >
           <List>
+            <ListItem
+              button
+              sx={{ color: "#fff" }}
+              component={Link}
+              to="/"
+              onClick={toggleDrawer}
+            >
+              <ListItemText primary="Home" />
+            </ListItem>
             <ListItem
               button
               sx={{ color: "#fff" }}

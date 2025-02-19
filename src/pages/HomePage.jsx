@@ -1,6 +1,6 @@
-import React from "react";
-import { Typography, Button, Box, Grid } from "@mui/material";
+import { Typography, Button, Box, Grid, Container } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PostsSnippet from "../components/PostSnippet"; 
 
 const HomePage = () => {
   return (
@@ -10,16 +10,16 @@ const HomePage = () => {
         minHeight: "100vh",
         color: "#fff",
         position: "relative",
-        overflowX: "hidden", // ✅ Prevents horizontal scrolling
+        overflowX: "hidden",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        px: { xs: 2, sm: 4, md: 8 }, // Responsive padding
-        width: "100%", // ✅ Ensures full width without overflow
-        maxWidth: "100vw", // ✅ Prevents excess width
+        px: { xs: 2, sm: 4, md: 8 },
+        width: "100%",
+        maxWidth: "100vw",
       }}
     >
-      <Box sx={{ width: "100%", maxWidth: "1200px", mx: "auto" }}>
+      <Container maxWidth="lg">
         <Grid
           container
           spacing={4}
@@ -27,19 +27,12 @@ const HomePage = () => {
           justifyContent="center"
           direction={{ xs: "column-reverse", md: "row" }}
         >
-          <Grid item xs={12} md={6} sx={{ textAlign: "center" }}>
-            <img
-              src="/path-to-your-image.png"
-              alt="Dashboard Illustration"
-              style={{
-                width: "100%",
-                maxWidth: "100%", // ✅ Ensures it stays within the grid
-                height: "auto",
-                borderRadius: "10px",
-              }}
-            />
+          {/* ✅ Replaced Image with PostsSnippet */}
+          <Grid item xs={12} md={6}>
+            <PostsSnippet />
           </Grid>
 
+          {/* Text Section */}
           <Grid
             item
             xs={12}
@@ -94,18 +87,18 @@ const HomePage = () => {
             </Box>
           </Grid>
         </Grid>
-      </Box>
+      </Container>
 
-      {/* Fixed SVG to prevent overflow */}
+      {/* Wave Effect */}
       <svg
         viewBox="0 0 1440 320"
         style={{
           position: "absolute",
           bottom: 0,
           left: 0,
-          width: "100%", // ✅ Changed from 100vw to 100%
+          width: "100%",
           height: "auto",
-          overflow: "hidden", // ✅ Prevents any excess
+          overflow: "hidden",
         }}
       >
         <path
