@@ -40,7 +40,9 @@ const Navbar = () => {
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         {/* Logo */}
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
-          LU Software
+          <Link style={{ color: "#fff", textDecoration: "none" }} to="/">
+            LU Software
+          </Link>
         </Typography>
 
         {/* Desktop Menu */}
@@ -65,7 +67,7 @@ const Navbar = () => {
 
           {/* Theme Toggle Button */}
           <IconButton
-            sx={{ background: "#76c043", borderRadius: "10px", }}
+            sx={{ background: "#76c043", borderRadius: "10px" }}
             onClick={toggleTheme}
           >
             {theme === "dark" ? (

@@ -25,9 +25,9 @@ const HomePage = () => {
           spacing={4}
           alignItems="center"
           justifyContent="center"
-          direction={{ xs: "column-reverse", md: "row", with:"100vw" }}
+          direction={{ xs: "column-reverse", md: "row", with: "100vw" }}
         >
-          {/* ✅ Replaced Image with PostsSnippet */}
+          {/*PostsSnippet */}
           <Grid item xs={12} md={6}>
             <PostsSnippet />
           </Grid>
@@ -46,11 +46,10 @@ const HomePage = () => {
                 lineHeight: "1.2",
                 maxWidth: "500px",
                 mx: "auto",
-                mt:"60px"
+                mt: "80px",
               }}
             >
               Hi, Welcome
-              
             </Typography>
             <Typography
               sx={{ mt: 2, opacity: 0.9, maxWidth: "500px", mx: "auto" }}
@@ -75,8 +74,8 @@ const HomePage = () => {
               </Button>
               <Button
                 sx={{
-                  background: "#e1bee7",
-                  color: "#6a1b9a",
+                  background: "#5a9e34",
+                  color: "#fff",
                   px: 4,
                   borderRadius: "20px",
                   fontWeight: "bold",
