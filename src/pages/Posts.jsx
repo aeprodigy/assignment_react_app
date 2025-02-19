@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import { useTheme } from "@mui/material/node/styles";
 
 const Posts = () => {
   const postDispatch = useDispatch();
@@ -22,6 +23,11 @@ const Posts = () => {
   const [newPostTitle, setNewPostTitle] = useState("");//stores the new post title
   const [newPostBody, setNewPostBody] = useState("");//stat for the new post body
   const [searchQuery, setSearchQuery] = useState("");//the search query
+
+
+  //theming
+
+const theme = useTheme();
 
   useEffect(() => {
     postDispatch(fetchPosts());
@@ -62,7 +68,7 @@ const Posts = () => {
         mx: "auto",
         mt: 4,
         color: "#fff",
-        background: "linear-gradient(135deg, #9c27b0 0%, #6a1b9a 100%)",
+        // background: "linear-gradient(135deg, #9c27b0 0%, #6a1b9a 100%)",
         borderRadius: "10px",
         p: 3,
         boxShadow: 5,
@@ -74,7 +80,7 @@ const Posts = () => {
           fontWeight: "bold",
           mb: 3,
           textAlign: "center",
-          color: "#e1bee7",
+          color: "#9c27b0",
           mt: 4,
         }}
       >
@@ -89,10 +95,10 @@ const Posts = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           sx={{
             mb: 3,
-            background: "#fff",
+            background: "#6a1b9a",
             borderRadius: "10px",
             width: "550px",
-            input: { color: "#6a1b9a", fontWeight: "bold" },
+            input: { color: "#fff", fontWeight: "bold" },
           }}
         />
       </Box>
@@ -102,14 +108,13 @@ const Posts = () => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          background: "#fff",
+          background: theme.palette.mode === "dark" ? "#1e1e1e" : "#fff", // Adjust for dark mode inmy thenmeprovider wrapper
           padding: 3,
           borderRadius: "10px",
-          //width: "550px",
           mx: "auto",
           mb: 3,
-          boxShadow: 2,
-          color: "#6a1b9a",
+          boxShadow: 3,
+          color: theme.palette.mode === "dark" ? "#e1bee7" : "#6a1b9a", // Adjust text color
         }}
       >
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
