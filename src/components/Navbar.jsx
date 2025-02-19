@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,9 +14,13 @@ import {
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { ThemeContext } from "../Theming/ThemeProviderWrapper";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const toggleDrawer = () => {
     setMobileOpen(!mobileOpen);
@@ -28,7 +32,7 @@ const Navbar = () => {
       sx={{
         background: "#6a1b9a",
         boxShadow: "none",
-        opacity:"10px",
+        opacity: "10px",
         backdropFilter: "blur(px)",
         width: "100%",
       }}
@@ -58,17 +62,18 @@ const Navbar = () => {
           >
             Profile
           </Button>
-          <Button
-            sx={{
-              background: "#76c043",
-              color: "#fff",
-              px: 3,
-              borderRadius: "20px",
-              "&:hover": { background: "#5a9e34" },
-            }}
+
+          {/* Theme Toggle Button */}
+          <IconButton
+            sx={{ background: "#76c043", borderRadius: "10px", }}
+            onClick={toggleTheme}
           >
-            Sign Up
-          </Button>
+            {theme === "dark" ? (
+              <LightModeIcon sx={{ color: "#fff" }} />
+            ) : (
+              <DarkModeIcon sx={{ color: "#fff" }} />
+            )}
+          </IconButton>
         </Box>
 
         {/* Hamburger Icon (Mobile) */}
@@ -128,14 +133,19 @@ const Navbar = () => {
             >
               <ListItemText primary="Profile" />
             </ListItem>
+
+            {/* Theme Toggle Button in Mobile Menu */}
             <ListItem
-              button
               sx={{ background: "#76c043", borderRadius: "10px", mt: 2 }}
-              onClick={toggleDrawer}
+              button
+              onClick={toggleTheme}
             >
+              <IconButton sx={{ color: "#fff" }}>
+                {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+              </IconButton>
               <ListItemText
-                primary="Sign Up"
-                sx={{ textAlign: "center", color: "#fff" }}
+                primary={theme === "dark" ? "Light Mode" : "Dark Mode"}
+                sx={{ color: "#fff" }}
               />
             </ListItem>
           </List>

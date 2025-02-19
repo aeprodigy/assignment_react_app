@@ -16,7 +16,7 @@ const HomePage = () => {
         justifyContent: "center",
         px: { xs: 2, sm: 4, md: 8 },
         width: "100%",
-        maxWidth: "100vw",
+        maxWidth: "100%",
       }}
     >
       <Container maxWidth="lg">
@@ -25,7 +25,7 @@ const HomePage = () => {
           spacing={4}
           alignItems="center"
           justifyContent="center"
-          direction={{ xs: "column-reverse", md: "row" }}
+          direction={{ xs: "column-reverse", md: "row", with:"100vw" }}
         >
           {/* ✅ Replaced Image with PostsSnippet */}
           <Grid item xs={12} md={6}>
@@ -46,10 +46,11 @@ const HomePage = () => {
                 lineHeight: "1.2",
                 maxWidth: "500px",
                 mx: "auto",
+                mt:"60px"
               }}
             >
-              Sed Imperdiet Enim li Vitae{" "}
-              <span style={{ color: "#e1bee7" }}>Viverra Justo</span>
+              Hi, Welcome
+              
             </Typography>
             <Typography
               sx={{ mt: 2, opacity: 0.9, maxWidth: "500px", mx: "auto" }}

@@ -19,6 +19,7 @@ const Posts = () => {
   const { items, loading, error } = useSelector((state) => state.posts);
   const [likes, setLikes] = useState({});
   const [comments, setComments] = useState({});
+  const [searchQuery, setSearchQuery] = useState(""); // New state for search
 
   useEffect(() => {
     postDispatch(fetchPosts());
@@ -27,7 +28,6 @@ const Posts = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  //this is a methid to likes count
   const handleLike = (postId) => {
     setLikes((prev) => ({
       ...prev,
@@ -42,10 +42,15 @@ const Posts = () => {
     }));
   };
 
+  // Filter posts based on search input
+  const filteredPosts = items.filter((post) =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <Box
       sx={{
-        maxWidth: "900px",
+        maxWidth: "100vw",
         mx: "auto",
         mt: 4,
         color: "#fff",
@@ -62,86 +67,122 @@ const Posts = () => {
           mb: 3,
           textAlign: "center",
           color: "#e1bee7",
+          mt: 4,
         }}
       >
         Recent Posts
       </Typography>
 
-      {items.map((post) => (
-        <Card
-          key={post.id}
+      {/* Search Bar */}
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+        <TextField
+          label="Search posts..."
+          variant="outlined"
+          fullWidth
           sx={{
-            mb: 3,
-            borderRadius: "12px",
-            background: "#6a1b9a",
-            //boxShadow: "3px 3px 15px rgba(255, 255, 255, 0.2)",
-            color: "#fff",
+            maxWidth: "500px",
+            background: "#fff",
+            borderRadius: "6px",
+            input: { color: "#6a1b9a", fontWeight: "bold" },
           }}
-        >
-          <CardContent>
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold", color: "#e1bee7" }}
-            >
-              {post.title}
-            </Typography>
-            <Typography sx={{ mt: 1, opacity: 0.9 }}>
-              {post.body.substring(0, 100)}...
-            </Typography>
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </Box>
 
-            {/* Post actions */}
-            <Box
+      {/* Centered Posts Container */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 3,
+        }}
+      >
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
+            <Card
+              key={post.id}
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                mt: 2,
+                mb: 3,
+                borderRadius: "12px",
+                width: "500px",
+                background: "#6a1b9a",
+                color: "#fff",
               }}
             >
-              <Button
-                component={Link}
-                to={`/posts/${post.id}`}
-                sx={{ color: "#e1bee7", textTransform: "none" }}
-              >
-                Read More
-              </Button>
-
-              <Box>
-                <IconButton
-                  onClick={() => handleLike(post.id)}
-                  sx={{ color: "#e1bee7" }}
+              <CardContent>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: "bold", color: "#e1bee7" }}
                 >
-                  <FavoriteIcon />
-                </IconButton>
-                <Typography component="span">{likes[post.id] || 0}</Typography>
-
-                <IconButton sx={{ color: "#e1bee7" }}>
-                  <ChatBubbleOutlineIcon />
-                </IconButton>
-                <Typography component="span">
-                  {Math.floor(Math.random() * 10) + 1} Comments
+                  {post.title}
                 </Typography>
-              </Box>
-            </Box>
+                <Typography sx={{ mt: 1, opacity: 0.9 }}>
+                  {post.body.substring(0, 100)}...
+                </Typography>
 
-            {/* Comment Input */}
-            <TextField
-              fullWidth
-              size="small"
-              variant="outlined"
-              placeholder="Write a comment..."
-              value={comments[post.id] || ""}
-              onChange={(e) => handleCommentChange(post.id, e.target.value)}
-              sx={{
-                mt: 2,
-                background: "#fff",
-                borderRadius: "6px",
-                input: { color: "#6a1b9a", fontWeight: "bold" },
-              }}
-            />
-          </CardContent>
-        </Card>
-      ))}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    mt: 2,
+                  }}
+                >
+                  <Button
+                    component={Link}
+                    to={`/posts/${post.id}`}
+                    sx={{ color: "#e1bee7", textTransform: "none" }}
+                  >
+                    Read More
+                  </Button>
+
+                  <Box>
+                    <IconButton
+                      onClick={() => handleLike(post.id)}
+                      sx={{ color: likes[post.id] > 0 ? "red" : "#e1bee7" }}
+                    >
+                      <FavoriteIcon />
+                    </IconButton>
+
+                    <Typography component="span">
+                      {likes[post.id] || 0}
+                    </Typography>
+
+                    <IconButton sx={{ color: "#e1bee7" }}>
+                      <ChatBubbleOutlineIcon />
+                    </IconButton>
+                    <Typography component="span">
+                      {Math.floor(Math.random() * 10) + 1} Comments
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <TextField
+                  fullWidth
+                  size="small"
+                  variant="outlined"
+                  placeholder="Write a comment..."
+                  value={comments[post.id] || ""}
+                  onChange={(e) => handleCommentChange(post.id, e.target.value)}
+                  sx={{
+                    mt: 2,
+                    background: "#fff",
+                    borderRadius: "6px",
+                    input: { color: "#6a1b9a", fontWeight: "bold" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <Typography sx={{ color: "#e1bee7", mt: 2 }}>
+            No posts found.
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 };
