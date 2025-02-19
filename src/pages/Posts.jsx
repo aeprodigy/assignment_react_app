@@ -21,7 +21,7 @@ const Posts = () => {
   const [userPosts, setUserPosts] = useState([]); // This state stores my user-created posts
   const [newPostTitle, setNewPostTitle] = useState("");//stores the new post title
   const [newPostBody, setNewPostBody] = useState("");//stat for the new post body
-  const [searchQuery, setSearchQuery] = useState("");//the search query bbbb
+  const [searchQuery, setSearchQuery] = useState("");//the search query
 
   useEffect(() => {
     postDispatch(fetchPosts());
@@ -105,7 +105,7 @@ const Posts = () => {
           background: "#fff",
           padding: 3,
           borderRadius: "10px",
-          width: "550px",
+          //width: "550px",
           mx: "auto",
           mb: 3,
           boxShadow: 2,
